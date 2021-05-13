@@ -3,7 +3,7 @@ openapi: '3.0.2'
 info:
   title: "VM Manager API"
   description: |
-   test test test
+   <https://hackmd.io/xh0yaESoTqS2JqsxB7tm5w?view>
   version: "0.1"
 
 servers:
