@@ -1,0 +1,97 @@
+openapi: '3.0.2'
+
+info:
+  title: "VM Manager API"
+  description: |
+   test test test
+  version: "0.1"
+
+servers:
+  - url: http://192.168.100.1:59487
+
+components:
+  schemas:
+    VM:
+      properties:
+        id:
+          type: integer
+        create_time:
+          type: string
+        password:
+          type: string
+        name:
+          type: string
+      example:
+        id: 6005
+        create_time: "2021-05-13T18:28:30.20365668+08:00"
+        password: "B0f73igR"
+        name: "NISRA-VM-6005"
+
+paths:
+  /list:
+    get:
+      summary: List all VMs
+      description: Returns a list a VM infos.
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  <id>:
+                    type: object
+                    $ref: "#/components/schemas/VM"
+
+  /del/{id}:
+    get:
+      summary: Delete a VM by ID
+      description: Returns the status of the delete operation
+      parameters:
+        - in: path
+          name: "id"
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Successfully delete a VM
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  ok:
+                    type: string
+                example:
+                  id: 6005
+                  ok: "ok"
+        '418':
+          description: Failed to delete a VM
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  ok:
+                    type: string
+                example:
+                  id: 6005
+                  ok: "nope"
+
+  /new:
+    get:
+      summary: Create a new VM
+      description: Returns the info of the newly created VM
+      responses:
+        '200':
+          description: Successfully create a VM
+          content:
+            application/json:
+                schema:
+                  $ref: "#/components/schemas/VM"
